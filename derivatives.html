@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differentiation - A Level Mathematics</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .slide:hover {
+            transform: translateY(-5px);
+        }
+        
+        .slide-header {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        h2 {
+            font-size: 2em;
+            color: #2196F3;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #1976D2;
+            margin: 20px 0 15px 0;
+        }
+        
+        .formula-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .example-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .graph-container {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .step-by-step {
+            background: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .real-world {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Title Slide -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>Differentiation</h1>
+                <p style="font-size: 1.2em;">A Level Mathematics - Edexcel</p>
+                <p>Advanced Calculus Techniques</p>
+            </div>
+        </div>
+
+        <!-- Part 1: Revision -->
+        <div class="slide">
+            <h2>Part 1: Revision (Brief Overview)</h2>
+            
+            <h3>1. Basic Derivative Formulas</h3>
+            <div class="formula-box">
+                <p><strong>Power Rule:</strong> If $f(x) = x^n$, then $f'(x) = nx^{n-1}$</p>
+                <p><strong>Constant Rule:</strong> If $f(x) = c$, then $f'(x) = 0$</p>
+                <p><strong>Sum Rule:</strong> $(f + g)' = f' + g'$</p>
+                <p><strong>Product Rule:</strong> $(fg)' = f'g + fg'$</p>
+                <p><strong>Chain Rule:</strong> $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Quick Examples:</h4>
+                <ul>
+                    <li>$f(x) = 3x^4 \Rightarrow f'(x) = 12x^3$</li>
+                    <li>$f(x) = 2x^3 + 5x - 7 \Rightarrow f'(x) = 6x^2 + 5$</li>
+                    <li>$f(x) = \sqrt{x} = x^{1/2} \Rightarrow f'(x) = \frac{1}{2}x^{-1/2} = \frac{1}{2\sqrt{x}}$</li>
+                </ul>
+            </div>
+
+            <h3>2. Gradients, Tangents and Normals</h3>
+            <div class="two-column">
+                <div>
+                    <div class="formula-box">
+                        <p><strong>Gradient at point $(a, f(a))$:</strong></p>
+                        <p>$m = f'(a)$</p>
+                        <br>
+                        <p><strong>Tangent line equation:</strong></p>
+                        <p>$y - f(a) = f'(a)(x - a)$</p>
+                        <br>
+                        <p><strong>Normal line equation:</strong></p>
+                        <p>$y - f(a) = -\frac{1}{f'(a)}(x - a)$</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="graph-container">
+                        <div id="tangent-graph" style="width:100%;height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Second Derivative</h3>
+            <div class="formula-box">
+                <p>If $f'(x)$ is the first derivative, then:</p>
+                <p>$f''(x) = \frac{d}{dx}[f'(x)] = \frac{d^2y}{dx^2}$</p>
+                <br>
+                <p><strong>Example:</strong> If $f(x) = x^4 - 2x^3 + x^2$</p>
+                <p>Then $f'(x) = 4x^3 - 6x^2 + 2x$</p>
+                <p>And $f''(x) = 12x^2 - 12x + 2$</p>
+            </div>
+        </div>
+
+        <!-- Part 2: Today's Class -->
+        <div class="slide">
+            <h2>Part 2: Today's Class - Advanced Applications</h2>
+            
+            <h3>1. Increasing and Decreasing Functions</h3>
+            <div class="highlight">
+                <p><strong>Key Principle:</strong> The sign of the first derivative determines if a function is increasing or decreasing.</p>
+            </div>
+            
+            <div class="formula-box">
+                <p>For a function $f(x)$ on interval $(a,b)$:</p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>If $f'(x) > 0$ for all $x \in (a,b)$, then $f$ is <strong>increasing</strong> on $(a,b)$</li>
+                    <li>If $f'(x) < 0$ for all $x \in (a,b)$, then $f$ is <strong>decreasing</strong> on $(a,b)$</li>
+                    <li>If $f'(x) = 0$, then $f$ has a <strong>stationary point</strong></li>
+                </ul>
+            </div>
+
+            <div class="step-by-step">
+                <h4>Step-by-Step Method:</h4>
+                <ol>
+                    <li>Find $f'(x)$</li>
+                    <li>Solve $f'(x) = 0$ to find critical points</li>
+                    <li>Test the sign of $f'(x)$ in each interval</li>
+                    <li>Determine where function increases/decreases</li>
+                </ol>
+            </div>
+
+            <div class="example-box">
+                <h4>Example: Analyze $f(x) = x^3 - 3x^2 + 2$</h4>
+                <p>Step 1: $f'(x) = 3x^2 - 6x = 3x(x - 2)$</p>
+                <p>Step 2: Critical points: $x = 0$ and $x = 2$</p>
+                <p>Step 3: Test intervals:</p>
+                <ul>
+                    <li>$x < 0$: $f'(-1) = 3(-1)(−3) = 9 > 0$ → Increasing</li>
+                    <li>$0 < x < 2$: $f'(1) = 3(1)(-1) = -3 < 0$ → Decreasing</li>
+                    <li>$x > 2$: $f'(3) = 3(3)(1) = 9 > 0$ → Increasing</li>
+                </ul>
+            </div>
+
+            <div class="graph-container">
+                <div id="increasing-decreasing-graph" style="width:100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h3>2. Stationary Points and Their Nature</h3>
+            
+            <div class="formula-box">
+                <p><strong>Stationary Points:</strong> Points where $f'(x) = 0$</p>
+                <br>
+                <p><strong>Classification using Second Derivative Test:</strong></p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>If $f''(x) > 0$: <strong>Local Minimum</strong></li>
+                    <li>If $f''(x) < 0$: <strong>Local Maximum</strong></li>
+                    <li>If $f''(x) = 0$: <strong>Point of Inflection</strong> (or inconclusive)</li>
+                </ul>
+            </div>
+
+            <div class="step-by-step">
+                <h4>Complete Method for Finding and Classifying Stationary Points:</h4>
+                <ol>
+                    <li>Find $f'(x)$ and solve $f'(x) = 0$</li>
+                    <li>Find $f''(x)$</li>
+                    <li>Evaluate $f''(x)$ at each critical point</li>
+                    <li>Classify each point using the second derivative test</li>
+                    <li>Find the y-coordinates: $y = f(x)$</li>
+                </ol>
+            </div>
+
+            <div class="example-box">
+                <h4>Detailed Example: $f(x) = x^4 - 4x^3 + 4x^2$</h4>
+                <p><strong>Step 1:</strong> $f'(x) = 4x^3 - 12x^2 + 8x = 4x(x^2 - 3x + 2) = 4x(x-1)(x-2)$</p>
+                <p>Critical points: $x = 0, 1, 2$</p>
+                
+                <p><strong>Step 2:</strong> $f''(x) = 12x^2 - 24x + 8$</p>
+                
+                <p><strong>Step 3 & 4:</strong> Evaluate $f''(x)$ at critical points:</p>
+                <ul>
+                    <li>$f''(0) = 8 > 0$ → Local minimum at $(0, 0)$</li>
+                    <li>$f''(1) = 12 - 24 + 8 = -4 < 0$ → Local maximum at $(1, 1)$</li>
+                    <li>$f''(2) = 48 - 48 + 8 = 8 > 0$ → Local minimum at $(2, 0)$</li>
+                </ul>
+            </div>
+
+            <div class="graph-container">
+                <div id="stationary-points-graph" style="width:100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h3>3. Sketching Gradient Functions</h3>
+            
+            <div class="highlight">
+                <p><strong>Key Relationship:</strong> The gradient function $f'(x)$ shows the slope of the original function $f(x)$ at every point.</p>
+            </div>
+
+            <div class="formula-box">
+                <p><strong>Important Connections:</strong></p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>Where $f(x)$ has maximum/minimum → $f'(x) = 0$</li>
+                    <li>Where $f(x)$ is increasing → $f'(x) > 0$</li>
+                    <li>Where $f(x)$ is decreasing → $f'(x) < 0$</li>
+                    <li>Where $f(x)$ has steepest slope → $f'(x)$ has maximum/minimum</li>
+                </ul>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h4>Original Function $f(x) = x^3 - 3x^2 + 2$</h4>
+                    <div class="graph-container">
+                        <div id="original-function-graph" style="width:100%;height:300px;"></div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Gradient Function $f'(x) = 3x^2 - 6x$</h4>
+                    <div class="graph-container">
+                        <div id="gradient-function-graph" style="width:100%;height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-by-step">
+                <h4>Steps to Sketch $f'(x)$ from $f(x)$:</h4>
+                <ol>
+                    <li>Identify where $f(x)$ has horizontal tangents (stationary points)</li>
+                    <li>Mark these as x-intercepts of $f'(x)$</li>
+                    <li>Determine where $f(x)$ is increasing/decreasing</li>
+                    <li>Sketch $f'(x)$ positive/negative accordingly</li>
+                    <li>Consider the steepness of $f(x)$ to determine the magnitude of $f'(x)$</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h3>4. Real-Life Applications of Differentiation</h3>
+            
+            <div class="real-world">
+                <h4>🚗 Optimization Problems</h4>
+                <p><strong>Problem:</strong> A rectangular field is to be enclosed with 200m of fencing. What dimensions give maximum area?</p>
+                
+                <p><strong>Solution Process:</strong></p>
+                <p>Let width = $x$, then length = $\frac{200-2x}{2} = 100-x$</p>
+                <p>Area: $A(x) = x(100-x) = 100x - x^2$</p>
+                <p>$A'(x) = 100 - 2x$</p>
+                <p>Setting $A'(x) = 0$: $100 - 2x = 0 \Rightarrow x = 50$</p>
+                <p>$A''(x) = -2 < 0$ → Maximum</p>
+                <p><strong>Answer:</strong> 50m × 50m gives maximum area of 2500m²</p>
+            </div>
+
+            <div class="real-world">
+                <h4>📈 Economics: Marginal Cost and Revenue</h4>
+                <p>If $C(x)$ is the cost function and $R(x)$ is the revenue function:</p>
+                <ul>
+                    <li><strong>Marginal Cost:</strong> $MC = C'(x)$</li>
+                    <li><strong>Marginal Revenue:</strong> $MR = R'(x)$</li>
+                    <li><strong>Profit Maximization:</strong> $MR = MC$ or $R'(x) = C'(x)$</li>
+                </ul>
+            </div>
+
+            <div class="real-world">
+                <h4>🏗️ Engineering: Related Rates</h4>
+                <p><strong>Problem:</strong> A balloon is being inflated. When radius = 5m, it's increasing at 2 m/s. How fast is volume changing?</p>
+                
+                <p><strong>Solution:</strong></p>
+                <p>$V = \frac{4}{3}\pi r^3$</p>
+                <p>$\frac{dV}{dt} = \frac{dV}{dr} \cdot \frac{dr}{dt} = 4\pi r^2 \cdot \frac{dr}{dt}$</p>
+                <p>When $r = 5$ and $\frac{dr}{dt} = 2$:</p>
+                <p>$\frac{dV}{dt} = 4\pi(5^2)(2) = 200\pi$ m³/s</p>
+            </div>
+
+            <div class="graph-container">
+                <div id="optimization-graph" style="width:100%;height:350px;"></div>
+            </div>
+        </div>
+
+        <!-- Summary Slide -->
+        <div class="slide">
+            <h2>Summary & Key Takeaways</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3>Essential Skills Mastered:</h3>
+                    <ul>
+                        <li>✅ Identifying increasing/decreasing intervals</li>
+                        <li>✅ Finding and classifying stationary points</li>
+                        <li>✅ Sketching gradient functions</li>
+                        <li>✅ Solving real-world optimization problems</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Key Formulas to Remember:</h3>
+                    <div class="formula-box">
+                        <p>$f'(x) > 0 \Rightarrow$ Increasing</p>
+                        <p>$f'(x) < 0 \Rightarrow$ Decreasing</p>
+                        <p>$f'(x) = 0 \Rightarrow$ Stationary point</p>
+                        <p>$f''(x) > 0 \Rightarrow$ Minimum</p>
+                        <p>$f''(x) < 0 \Rightarrow$ Maximum</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h3>🎯 Exam Tips:</h3>
+                <ul>
+                    <li>Always check your critical points by substituting back</li>
+                    <li>Use the second derivative test for classification</li>
+                    <li>Sketch graphs to visualize the problem</li>
+                    <li>In optimization problems, always verify it's a maximum/minimum</li>
+                    <li>Show all working steps clearly</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Graph 1: Tangent and Normal Lines
+        const x1 = [];
+        const y1 = [];
+        for (let i = -3; i <= 3; i += 0.1) {
+            x1.push(i);
+            y1.push(i * i);
+        }
+        
+        const tangentX = [];
+        const tangentY = [];
+        const normalX = [];
+        const normalY = [];
+        for (let i = -1; i <= 3; i += 0.1) {
+            tangentX.push(i);
+            tangentY.push(4 * i - 3); // tangent at (1,1): y = 4x - 3
+            normalX.push(i);
+            normalY.push(-0.25 * i + 1.25); // normal at (1,1): y = -0.25x + 1.25
+        }
+
+        Plotly.newPlot('tangent-graph', [{
+            x: x1,
+            y: y1,
+            type: 'scatter',
+            name: 'f(x) = x²',
+            line: {color: 'blue', width: 3}
+        }, {
+            x: tangentX,
+            y: tangentY,
+            type: 'scatter',
+            name: 'Tangent at (1,1)',
+            line: {color: 'red', width: 2}
+        }, {
+            x: normalX,
+            y: normalY,
+            type: 'scatter',
+            name: 'Normal at (1,1)',
+            line: {color: 'green', width: 2}
+        }, {
+            x: [1],
+            y: [1],
+            type: 'scatter',
+            mode: 'markers',
+            name: 'Point (1,1)',
+            marker: {color: 'orange', size: 10}
+        }], {
+            title: 'Tangent and Normal Lines',
+            xaxis: {title: 'x'},
+            yaxis: {title: 'y'},
+            showlegend: true
+        });
+
+        // Graph 2: Increasing/Decreasing Function
+        const x2 = [];
+        const y2 = [];
+        for (let i = -1; i <= 3; i += 0.1) {
+            x2.push(i);
+            y2.push(Math.pow(i, 3) - 3 * Math.pow(i, 2) + 2);
+        }
+
+        Plotly.newPlot('increasing-decreasing-graph', [{
+            x: x2,
+            y: y2,
+            type: 'scatter',
+            name: 'f(x) = x³ - 3x² + 2',
+            line: {color: 'purple', width: 3}
+        }, {
+            x: [0, 2],
+            y: [2, -2],
+            type: 'scatter',
+            mode: 'markers',
+            name: 'Critical Points',
+            marker: {color: 'red', size: 8}
+        }], {
+            title: 'f(x) = x³ - 3x² + 2: Increasing and Decreasing Intervals',
+            xaxis: {title: 'x'},
+            yaxis: {title: 'f(x)'},
+            annotations: [
+                {x: -0.5, y: 1, text: 'Increasing', showarrow: false, font: {color: 'green'}},
+                {x: 1, y: 0, text: 'Decreasing', showarrow: false, font: {color: 'red'}},
+                {x: 2.5, y: 0, text: 'Increasing', showarrow: false, font: {color: 'green'}}
+            ]
+        });
+
+        // Graph 3: Stationary Points
+        const x3 = [];
+        const y3 = [];
+        for (let i = -0.5; i <= 2.5; i += 0.1) {
+            x3.push(i);
+            y3.push(Math.pow(i, 4) - 4 * Math.pow(i, 3) + 4 * Math.pow(i, 2));
+        }
+
+        Plotly.newPlot('stationary-points-graph', [{
+            x: x3,
+            y: y3,
+            type: 'scatter',
+            name: 'f(x) = x⁴ - 4x³ + 4x²',
+            line: {color: 'blue', width: 3}
+        }, {
+            x: [0, 1, 2],
+            y: [0, 1, 0],
+            type: 'scatter',
+            mode: 'markers',
+            name: 'Stationary Points',
+            marker: {color: 'red', size: 10}
+        }], {
+            title: 'Stationary Points Classification',
+            xaxis: {title: 'x'},
+            yaxis: {title: 'f(x)'},
+            annotations: [
+                {x: 0, y: 0.3, text: 'Local Min', showarrow: true, arrowhead: 2},
+                {x: 1, y: 1.3, text: 'Local Max', showarrow: true, arrowhead: 2},
+                {x: 2, y: 0.3, text: 'Local Min', showarrow: true, arrowhead: 2}
+            ]
+        });
+
+        // Graph 4: Original Function
+        const x4 = [];
+        const y4 = [];
+        for (let i = -1; i <= 3; i += 0.1) {
+            x4.push(i);
+            y4.push(Math.pow(i, 3) - 3 * Math.pow(i, 2) + 2);
+        }
+
+        Plotly.newPlot('original-function-graph', [{
+            x: x4,
+            y: y4,
+            type: 'scatter',
+            name: 'f(x) = x³ - 3x² + 2',
+            line: {color: 'blue', width: 3}
+        }], {
+            title: 'Original Function',
+            xaxis: {title: 'x'},
+            yaxis: {title: 'f(x)'}
+        });
+
+        // Graph 5: Gradient Function
+        const x5 = [];
+        const y5 = [];
+        for (let i = -1; i <= 3; i += 0.1) {
+            x5.push(i);
+            y5.push(3 * Math.pow(i, 2) - 6 * i);
+        }
+
+        Plotly.newPlot('gradient-function-graph', [{
+            x: x5,
+            y: y5,
+            type: 'scatter',
+            name: "f'(x) = 3x² - 6x",
+            line: {color: 'red', width: 3}
+        }, {
+            x: [-1, 3],
+            y: [0, 0],
+            type: 'scatter',
+            mode: 'lines',
+            name: 'x-axis',
+            line: {color: 'black', width: 1, dash: 'dash'}
+        }], {
+            title: 'Gradient Function',
+            xaxis: {title: 'x'},
+            yaxis: {title: "f'(x)"}
+        });
+
+        // Graph 6: Optimization Problem
+        const x6 = [];
+        const y6 = [];
+        for (let i = 0; i <= 100; i += 1) {
+            x6.push(i);
+            y6.push(i * (100 - i));
+        }
+
+        Plotly.newPlot('optimization-graph', [{
+            x: x6,
+            y: y6,
+            type: 'scatter',
+            name: 'Area = x(100-x)',
+            line: {color: 'green', width: 3}
+        }, {
+            x: [50],
+            y: [2500],
+            type: 'scatter',
+            mode: 'markers',
+            name: 'Maximum Area',
+            marker: {color: 'red', size: 12}
+        }], {
+            title: 'Optimization: Maximum Area of Rectangle',
+            xaxis: {title: 'Width (m)'},
+            yaxis: {title: 'Area (m²)'},
+            annotations: [{
+                x: 50,
+                y: 2500,
+                text: 'Maximum: (50, 2500)',
+                showarrow: true,
+                arrowhead: 2
+            }]
+        });
+    </script>
+</body>
+</html>
